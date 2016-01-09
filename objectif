@@ -1,0 +1,86 @@
+liste chainer pour trouver la taile de la ligne avec buffer
+evaluation de la densite 
+
+
+
+DETETION:
+	peu importe la lectureon stoque toute la structure en mode binaire
+		-on a une liste chainee pour initialiser la taile des ligne
+			on recopie la premier
+		-chaque ligne dans une liste chainer. (pour les ajouter ratidement
+		-chaque ligne est un tableau de unsigned char de la bonne taille (sans le \n)
+	on fait des petit masque binaire rigolo pour savoir si tous les carer aux alentour sont vide
+		-on incremente un conteur sur x et sur y
+		-par contre il fautgerer les jointure sur x
+			vall=(vall < taille_max - 1? vall + 1 : 0);
+		-on garde le min + 1
+	on garde une ligne de int pour upper les taile_max de carrer en temp et un buffer
+		-index = x * taille_max + y (pour la premier ligne quand on copie l'une dans l'otre)
+	on detecte si le carater et viable et on lui trouve une action
+		si on est pas a la fin de la ligne
+			si c'est vide on fait le truc d'increment du short
+			si plein on met 0
+			si non ERREUR  et FINde tout
+		si non
+			si c'est '\n	=>	j++
+			si non			=>	erreur et FIN de programme
+	on teste le nombre de ligne
+		si read renvoie un mauvais nombre => le nombre de ligne ne correspond pas	=>	erreur
+	on sauvgarde la position xy du coin infferrieur droit du coin le plus grand
+		si plus grand on maj
+
+OPTI
+	si le plus grand est fini(pas sur ligne - 1), on peut finir en x
+	si taille pgc - pgc (ligne|colone) > (x_max|y_max) on arrette la lecture sur (x|y)
+
+	on ne fini pas les ligne en xy si taille
+	
+
+IMPRESSION:
+	0				->	y_sqr - size - 1	: on imprime la structure binaire
+	y_sqr - size	->	y_size				: on imprime (1)
+	y_sqr + 1		->	y_max				: on imprime la structure binaire
+	
+	(1)impression des ligne de carrer max
+		0				->	x_sqr - size - 1	: on imprime la structure binaire
+		x_sqr - size	->	yxsize				: on imprime le caractere plein
+		x_sqr + 1		->	x_max				: on imprime la structure binaire
+
+curseur xy 
+  	0		1
+0	x2|y-1	x1|y-1
+1	x2|y	x1|y
+
+ERREUR:
+	-mauvaus carracter
+	-ligne trop courte ou trop grande
+	-mauvais nombre de ligne
+	-pas de solution
+
+On peu garder un 0 de chaque coter de ligne (debut fin)
+	le bit M est le plus fort du precedent et 0 si debut
+
+
+On ferra un typedef de la variable de stocage pour comparer les performance
+On peu meme adapter la variable a la densiter ...
+
+D et F sont des bit de jonction on utilise donc sizeof - 2 octet par variable
+1 = vide, 0 = plein
+	D		 F
+a	0 001010 1  
+b	1 011011 0
+c	0 101001 0
+
+R1	b & a  		=	d 001010 f
+R2	b & a * 2  	=	d 000001 f
+R3	b & b * 2	=	d 001001 f
+
+R1 & R2 & R3 	=	d 000000 f
+
+
+ETAPE:
+	-on stoque lq structure
+	-on cherche le plus grand
+	-on imprime le resultat
+
+
