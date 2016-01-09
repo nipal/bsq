@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 18:50:29 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/07 22:49:56 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/09 21:52:36 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,9 @@ short 			min_val(short *line_work, short *line_temp, short i)
 	}
 }
 
-void			increm_max(short *line_work, j)
+void			increm_max(short *line_work, i)
 {
 	short	x_max;
-	short	i;
 	short	max;
 
 	max = (big_sqr_data(SIZE, 0))
@@ -94,15 +93,14 @@ void			increm_max(short *line_work, j)
 
 void			increm_num_line(t_bin tab, short *line_temp, short *line_work, short j)
 {
-	short	i;
-	short	nb_var;
-	short	k;
-	static	t_bin	val = 0;
-	short	max;
+	short			i;
+	static	short	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)) - 1)) + 1;
+	short			k;
+	static			t_bin	val = 0;
+	short			max;
 
 	i = -1;
-	max = sizeof(t_bin) * 8 - 1;
-	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)) - 1)) + 1;
+	max = (sizeof(t_bin) * 8) - BIT_LESS;
 	while (++i < nb_var)
 	{
 		k = -1;
@@ -117,11 +115,11 @@ void			increm_num_line(t_bin tab, short *line_temp, short *line_work, short j)
 			else
 				line_work[i * max + k] = 0;
 		}
+		increm_max(line_work, i);
 	}
-	increm_max(line_work, j);
 }
 
-short			search_the_big_one(t_bin **tab, short y_max, short i, short j)
+short			search_the_big_one(t_bin **tab, short y_max, short j)
 {
 	short	*line_temp;
 	short	*line_work;

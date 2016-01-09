@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,16 +6,17 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 14:02:30 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/06 23:38:42 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/09 20:16:51 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_the_structure.c"
 
-short	fill_the_char(char c, t_bin *line_bin, t_bin max, short init)
+short	fill_the_char(char c, t_bin *line_b, t_bin max, short init)
 {
-	static	t_bin coef = 1;
-	static	short i_b = 0;
+	static	t_bin	coef = 1;
+	static	short	i_b = 0;
+	static	short	max = ((8 * sizeof(t_bin)) - BIT_LESS);
 
 	if (init)
 	{
@@ -24,15 +24,15 @@ short	fill_the_char(char c, t_bin *line_bin, t_bin max, short init)
 		i_b = 0;
 	}
 	if (c == param(VIDE, 0))
-		line_bin[i_b] += coef;
+		line_b[i_b] += coef;
 	else if (c != param(PLEIN, 0))
 		return (-1);
 	if (coef < max)
 		coef = coef << 1;
 	else
 	{
-		if (i_b < ((param(SIZE_X, 0) - 1) / (sizeof(t_bin) - 1)))
-			line_bin[i_b] += (line_bin[i_b + 1] & 1) << (sizeof(t_bin) - 1);
+		if (i_b < ((param(SIZE_X, 0) - 1) / max))
+			line_b[i_b] += (line_b[i_b + 1] & 1) << max;
 		i_b++;
 		coef = 1;
 	}
@@ -41,12 +41,10 @@ short	fill_the_char(char c, t_bin *line_bin, t_bin max, short init)
 
 short	fill_line_bin(t_bin *line_bin, char *line_char, short x_max, short i_c)
 {
-	t_bin	coef;
-	t_bin	max;
+	t_bin			coef;
+	static	t_bin	max = 1 << ((8 * sizeof(t_bin)) - BIT_LESS);
 
 	coef = 1;
-	max = 1 << (8 * sizeof(t_bin) - 1);
-	fill_the_char(0, 0, 0, 1);
 	while (i_c < x_max)
 	{
 		if(fill_the_char(line_char[i_c], line_bin, max, 0) == -1)

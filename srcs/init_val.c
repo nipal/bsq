@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:07:15 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/07 01:20:41 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/09 20:27:59 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ short	param(short action, short valu)
 {
 	static	short	size_x = 0;
 	static	short	size_y = 0;
-	static	char	obstacle = '.';
-	static	char	plein = '#';
-	static	char	vide = ' ';
+	static	char	obstacle = 0;
+	static	char	plein = 0;
+	static	char	vide = 0;
 
 	if (action == SIZE_X)
 		return (size_x += valu);
