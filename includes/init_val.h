@@ -22,7 +22,7 @@
 
 short	param(short action, short valu);
 void	reste_param(void);
-char	ft_atoi_fd(int fd);
+char	ft_atoi_fd(int fd, char *c);
 int		init_param(int fd);
 
 #endif

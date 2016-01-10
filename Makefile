@@ -6,27 +6,41 @@
 #    By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/03 22:11:07 by fjanoty           #+#    #+#              #
-#    Updated: 2015/12/28 19:03:52 by fjanoty          ###   ########.fr        #
+#    Updated: 2016/01/10 18:36:48 by fjanoty          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 .PHONY: all, clean, fclean, re
 
 .SUFFIXES:
 
-NAME = ft_display_file
+NAME = bsq
 
-S = main.c
+S = big_sqr_data.c\
+	copie_first_line.c\
+	first_line.c\
+	ft_create_elem.c\
+	ft_ft.c\
+	ft_list_clear.c\
+	ft_list_push_back.c\
+	ft_list_size.c\
+	get_the_structure.c\
+	init_val.c\
+	main.c\
+	print_file.c\
+	print_the_result.c\
+	search_the_big_one.c
 
-O = $(S:.c=.o)
+SRC = $(addprefix srcs/,$(S))
 
-#SRC = $(addprefix srcs/,$(S))
+FLAG = -Wall -Wextra -Werror
 
 all : $(NAME)
 
 $(NAME) :
-	gcc -Wall -Wextra -Werror $(S) -o $(NAME)
+	gcc  $(SRC) -I includes -o $(NAME)
 clean :
-	rm -f nothing
-fclean : clean
+
+fclean :
 	rm -f $(NAME)
+re : fclean all
 

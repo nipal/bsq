@@ -97,12 +97,14 @@ dprintf(1, "%d	est ok\n", ++bug);
 dprintf(1, "%d	est ok\n", ++bug);
 	if(!get_the_structure(tab_bsq, fd, param(SIZE_X, 0), param(SIZE_Y, 0)))
 		return (-1);
-dprintf(1, "%d	est ok\n", ++bug);
+dprintf(1, "%d	est ok \\o/\n", ++bug);
+	print_the_result(tab_bsq);
+dprintf(1, "%d	est ok \\o/\n", ++bug);
 	close(fd);
 	if (search_the_big_one(tab_bsq))
-dprintf(1, "%d	est ok\n", ++bug);
+dprintf(1, "%d	est ok kl\n", ++bug);
 	print_the_result(tab_bsq);
-dprintf(1, "%d	est ok\n", ++bug);
+dprintf(1, "%d	est ok --|--\n", ++bug);
 	free_tab(tab_bsq);
 dprintf(1, "%d	est ok\n", ++bug);
 	return (0);

@@ -23,6 +23,8 @@
 # include "init_val.h"
 # include "search_the_big_one.h"
 # include "print_the_result.h"
+# include <sys/types.h>
+# include <sys/stat.h>
 
 short	param(short action, short valu);
 short	ft_print_file(char *name);

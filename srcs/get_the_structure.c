@@ -61,19 +61,19 @@ short	get_the_structure(t_bin **tab, int fd, short x_max, short y_max)
 	char	*line;
 int line_bug = 0;
 int boucle_bug = 0;
-y_max = 100;
+
 	j = 1;
-dprintf(1, "get the structure line %d et ymax: %d  %d\n", j, y_max, ++line_bug);
+//dprintf(1, "get the structure line %d et ymax: %d  %d\n", j, y_max, ++line_bug);
 	line = (char*)malloc(sizeof(char) * (x_max + 1));
 	if (!line)
 	{
 dprintf(1, "Mauvais malloc\n");
 		return (0);
 	}
-dprintf(1, "get the structure line ok pour %d\n", ++line_bug);
-	while (j < (y_max))
+//dprintf(1, "get the structure line ok pour %d\n", ++line_bug);
+	while (j < (y_max - 3))
 	{
-dprintf(1, "get the structure j: %d boucle %d\n", j, ++boucle_bug);
+//dprintf(1, "get the structure j: %d boucle %d\n", j, ++boucle_bug);
 		oct_lu = read(fd, line, x_max + 1);
 		if (oct_lu != x_max + 1)
 		{
