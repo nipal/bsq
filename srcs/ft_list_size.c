@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/03 22:45:56 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 04:21:46 by fjanoty          ###   ########.fr       */
+/*   Created: 2015/10/19 21:07:28 by fjanoty           #+#    #+#             */
+/*   Updated: 2015/12/16 20:27:25 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#include "ft_list.h"
 
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include "t_bin.h"
-# include "print_file.h"
+int	ft_list_size(t_list *begin_list)
+{
+	int		i;
+	t_list	*elem;
 
-#endif
-//	definir les constan des fonction de varible blogale pour init_val.h et get_the_tructure.h
-//	un peu ameliorer print the result
-//	se lancer dans le debuggage
-//
-//	PROAGRME DU DEBUGUE
-//		tester les decalage de bit, 
+	i = 0;
+	elem = begin_list;
+	while (elem)
+	{
+		elem = elem->next;
+		i++;
+	}
+	return (i);
+}

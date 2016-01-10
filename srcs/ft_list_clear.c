@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   ft_list_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/03 22:45:56 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 04:21:46 by fjanoty          ###   ########.fr       */
+/*   Created: 2015/10/19 21:07:28 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/05 19:05:43 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#include "ft_list.h"
 
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include "t_bin.h"
-# include "print_file.h"
+void	ft_list_clear(t_list **begin_list)
+{
+	t_list	*elem;
+	t_list	*rm;
 
-#endif
-//	definir les constan des fonction de varible blogale pour init_val.h et get_the_tructure.h
-//	un peu ameliorer print the result
-//	se lancer dans le debuggage
-//
-//	PROAGRME DU DEBUGUE
-//		tester les decalage de bit, 
+	elem = *begin_list;
+	while (elem)
+	{
+		rm = elem;
+		elem = elem->next;
+		free(rm);
+	}
+	*begin_list = 0;
+}

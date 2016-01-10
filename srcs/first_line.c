@@ -6,11 +6,11 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:14:14 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/05 19:09:55 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 03:57:37 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print_file.h"
+#include "first_line.h"
 
 void	get_first_line(t_list **line, int fd)
 {
@@ -19,7 +19,7 @@ void	get_first_line(t_list **line, int fd)
 
 	c = (char*)malloc(sizeof(char));
 	oct_lu = read(fd, c, 1);
-	while (oct_lu == SIZE_BUFF && *c != '\n')
+	while (oct_lu == 1 && *c != '\n')
 	{
 		c = (char*)malloc(sizeof(char));
 		oct_lu = read(fd, c, 1);

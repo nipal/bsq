@@ -6,17 +6,16 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 14:02:30 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/09 20:16:51 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 04:12:57 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_the_structure.c"
+#include "get_the_structure.h"
 
 short	fill_the_char(char c, t_bin *line_b, t_bin max, short init)
 {
 	static	t_bin	coef = 1;
 	static	short	i_b = 0;
-	static	short	max = ((8 * sizeof(t_bin)) - BIT_LESS);
 
 	if (init)
 	{
@@ -42,7 +41,7 @@ short	fill_the_char(char c, t_bin *line_b, t_bin max, short init)
 short	fill_line_bin(t_bin *line_bin, char *line_char, short x_max, short i_c)
 {
 	t_bin			coef;
-	static	t_bin	max = 1 << ((8 * sizeof(t_bin)) - BIT_LESS);
+	static	t_bin	max = 1 << ((8 * sizeof(t_bin)) - 1);
 
 	coef = 1;
 	while (i_c < x_max)
@@ -69,7 +68,6 @@ short	get_the_structure(t_bin **tab, int fd, short x_max, short y_max)
 		return (-2);
 	while (j < y_max)
 	{
-		i = 0;
 		if((tab[j] = (t_bin*)malloc(sizeof(t_bin) * nb_var)) == 0)
 			return (-2);
 		oct_lu = read(fd, line, x_max + 1);

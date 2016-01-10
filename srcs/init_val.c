@@ -6,11 +6,11 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:07:15 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/09 20:27:59 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 04:21:56 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print_file.h"
+#include "init_val.h"
 
 short	param(short action, short valu)
 {
@@ -42,7 +42,7 @@ void	reste_param(void)
 	param(PLEIN, -param(PLEIN , 0));
 }
 
-short	ft_atoi_fd(fd)
+short	ft_atoi_fd(int fd)
 {
 	char	c;
 	int		ok;
@@ -61,7 +61,7 @@ short	ft_atoi_fd(fd)
 		ok = read(fd, &c, 1);
 	}
 	if (ok)
-		return (nb_ligne);
+		return (nb_line);
 	else
 		return (- 1);
 }
@@ -73,18 +73,18 @@ int		init_param(int fd)
 	short	nb_line;
 
 	reste_param();
-	if (nb_line = ft_atoi_fd(fd) > 0)
+	if ((nb_line = ft_atoi_fd(fd)) > 0)
 		ok = 1;
 	else
 		ok = 0;
 	param(SIZE_Y, nb_line);
 	if (ok && c != '\n')
-		par && (VIDE, c);
-	if (ok && ok = read(fd, &c, 1) && c != '\n')
+		param(VIDE, c);
+	if (ok && (ok = read(fd, &c, 1)) && c != '\n')
 		param(OBSTACLE, c); 
-	if (ok && ok = read(fd, &c, 1) && c != '\n')
+	if (ok && (ok = read(fd, &c, 1)) && c != '\n')
 		param(PLEIN, c);
-	if (ok && ok = read(fd, &c, 1) && c == '\n')
+	if (ok && (ok = read(fd, &c, 1)) && c == '\n')
 		return (1);
 	else
 		return (0);

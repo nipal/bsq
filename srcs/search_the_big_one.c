@@ -6,30 +6,29 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 18:50:29 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/09 21:52:36 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 15:06:26 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print_file.h"
+#include "search_the_big_one.h"
 
-static	short	init_var(t_bin tab, short **line_temp, short **line_work
-		, short *nb_bit_last)
+static	short	init_var(short **line_temp, short **line_work, short *y_max)
 {
 	short	i;
 	short	max;
 	char	plein;
 	char	vide;
 
-	max = param(sizez_X, 0);
+	max = param(SIZE_X, 0);
 	*line_temp = (short*)malloc(sizeof(short) * max);
 	*line_work = (short*)malloc(sizeof(short) * max);
-	*nb_bit_last = param(SIZE_X, 0) % sizeof(t_bin) - 1;
 	plein = param(PLEIN, 0);
 	vide = param(VIDE, 0);
 	i = 0;
 	while (i < max)
 	{
-		if (tab[0][i] == paran())
+		line_temp[0][i] = 0;
+		line_work[0][i] = 0;
 			i++;
 	}
 	return (1);
@@ -50,7 +49,7 @@ short			big_sqr_data(short mode, short value)
 	return (0);
 }
 
-short 			min_val(short *line_work, short *line_temp, short i)
+static	short 	min_val(short *line_work, short *line_temp, short i)
 {
 	short	a;
 	short	b;
@@ -72,7 +71,7 @@ short 			min_val(short *line_work, short *line_temp, short i)
 	}
 }
 
-void			increm_max(short *line_work, i)
+static	void	increm_max(short *line_work, i)
 {
 	short	x_max;
 	short	max;
@@ -91,7 +90,7 @@ void			increm_max(short *line_work, i)
 	}
 }
 
-void			increm_num_line(t_bin tab, short *line_temp, short *line_work, short j)
+static	void	increm_num_line(t_bin **tab, short *line_temp, short *line_work, short j)
 {
 	short			i;
 	static	short	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)) - 1)) + 1;
@@ -113,19 +112,21 @@ void			increm_num_line(t_bin tab, short *line_temp, short *line_work, short j)
 			else if (tab[j][i] & 1 << k)
 				line_work[i * max + k] = 1;
 			else
-				line_work[i * max + k] = 0;
+				line_work[i * max + k] = 0
 		}
 		increm_max(line_work, i);
 	}
 }
 
-short			search_the_big_one(t_bin **tab, short y_max, short j)
+short			search_the_big_one(t_bin **tab)
 {
 	short	*line_temp;
 	short	*line_work;
-	short	nb_bit_last;
+	short	y_max;
+	short	j;
 
-	init_var(tab, &line_temp, &line_work, &nb_bit_last);
+	j = 0;
+	init_var(&line_temp, &line_work, &y_max);
 	if (!line_temp || !line_work)
 		return (-2);
 	while (j < y_max)

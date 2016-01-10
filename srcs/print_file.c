@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 13:28:02 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/07 01:20:37 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 04:32:01 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_bin	*malloc_line(short size)
 	short	i;
 
 	i = 0;
-	new_line = (t_bin*)m,alloc(size);
+	new_line = (t_bin*)malloc(size);
 	while (i < size)
 	{
 		new_line[i] = 0;
@@ -34,7 +34,7 @@ short	init_tab_bin(t_bin **tab)
 	short	nb_var;
 
 	j = 1;
-	y_max = param(SIZE_Y);
+	y_max = param(SIZE_Y, 0);
 	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)) - 1)) + 1;
 	while (j < y_max)
 	{
@@ -52,7 +52,7 @@ void	free_tab(t_bin **tab)
 	short	y_max;
 
 	j = 0;
-	y_max = param(SIZE_Y);
+	y_max = param(SIZE_Y, 0);
 	while (j < y_max)
 	{
 		free(tab[j]);
@@ -61,7 +61,7 @@ void	free_tab(t_bin **tab)
 	free(tab);
 }
 
-void	ft_print_file(char *name)
+short	ft_print_file(char *name)
 {
 	int					fd;
 	t_list				*line;
@@ -71,13 +71,13 @@ void	ft_print_file(char *name)
 		fd = open(name, O_RDONLY, S_IREAD);
 	else
 		fd = 0;
-	if(!init_param(fd));
+	if(!init_param(fd))
 		return (-1);
 	get_first_line(&line, fd);
 	tab_bsq = (t_bin**)malloc(sizeof(t_bin*) * param(SIZE_Y, 0));
 	if(!copie_first_line(tab_bsq, line, 1, 1))
 		return (-1);
-	if (!init_tab())
+	if (!init_tab_bin(tab_bsq))
 		return (-2);
 	if(!get_the_structure(tab_bsq, fd, param(SIZE_X, 0), param(SIZE_Y, 0)))
 		return (-1);
@@ -87,5 +87,6 @@ void	ft_print_file(char *name)
 //		on cree deux ligne de int  pour contabiliser les score
 //		on cree garde en memoire POS et SIZE du dernier plus grand carre
 //	si toujours pas d'erreur on imprime la solution
-	free_tab(tab);
+	free_tab(tab_bsq);
+	return (0);
 }

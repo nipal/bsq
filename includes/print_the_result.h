@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ft.c                                            :+:      :+:    :+:   */
+/*   print_the_result.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty </var/mail/fjanoty>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/05 14:07:51 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 02:33:24 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/01/10 01:54:01 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/10 05:07:35 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ft.h"
+#ifndef PRINT_THE_RESULT_H
+# define PRINT_THE_RESULT_H
 
-int		ft_strlen(char *str)
-{
-	int	i;
+# include <unistd.h>
+# include "init_val.h"
+# include "search_the_big_one.h"
+# include "t_bin.h"
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	ft_puterror(char *str)
-{
-	write(2, str, ft_strlen(str));
-}
-
-void	ft_putstr(unsigned char *str, int nb_char)
-{
-	write(1, str, nb_char);
-}
+void	print_the_result(t_bin **tab);
+#endif

@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_file.h                                       :+:      :+:    :+:   */
+/*   init_val.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty </var/mail/fjanoty>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/05 15:50:07 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 04:30:04 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/01/10 02:13:55 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/10 05:02:06 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_FILE_H
-# define PRINT_FILE_H
+#ifndef INIT_VAL_H
+# define INIT_VAL_H
 
-# include "t_bin.h"
-# include <stdlib.h>
-# include <fcntl.h>
 # include <unistd.h>
-# include "ft_list.h"
-# include "first_line.h"
-# include "copie_first_line.h"
-# include "init_val.h"
+# define SIZE_X	2
+# define SIZE_Y	4
+# define VIDE 8
+# define OBSTACLE 16
+# define PLEIN 32
 
 short	param(short action, short valu);
-short	ft_print_file(char *name);
 void	reste_param(void);
+short	ft_atoi_fd(int fd);
 int		init_param(int fd);
-t_bin	*malloc_line(short nb_var);
-#endif
 
+#endif

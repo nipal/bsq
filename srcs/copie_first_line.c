@@ -6,11 +6,11 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:23:53 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/07 01:14:28 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 03:57:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print_file.h"
+#include "copie_first_line.h"
 
 short	copie_first_line(t_bin **tab, t_list *first_line, short i, short coef)
 {
@@ -23,9 +23,10 @@ short	copie_first_line(t_bin **tab, t_list *first_line, short i, short coef)
 	fill_the_char(0, 0, 0, 1);
 	while (first_line)
 	{
-		if(fill_the_char(*(first_line->data), tab[0], max, 0) == -1)
+		if(fill_the_char((*(char*)(first_line->data)), tab[0], max, 0) == -1)
 			return (-1);
 		first_line = first_line->next;
 	}
 	ft_list_clear(&first_line);
+	return (0);
 }

@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ft.c                                            :+:      :+:    :+:   */
+/*   first_line.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fjanoty </var/mail/fjanoty>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/05 14:07:51 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 02:33:24 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/01/10 02:22:46 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/10 02:26:23 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ft.h"
+#ifndef FIRST_LINE_H
+# define FIRST_LINE_H
 
-int		ft_strlen(char *str)
-{
-	int	i;
+# include <unistd.h>
+# include "init_val.h"
+# include "ft_list.h"
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	ft_puterror(char *str)
-{
-	write(2, str, ft_strlen(str));
-}
-
-void	ft_putstr(unsigned char *str, int nb_char)
-{
-	write(1, str, nb_char);
-}
+void	get_first_line(t_list **line, int fd);
+#endif
