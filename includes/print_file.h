@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 15:50:07 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 04:30:04 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 17:13:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "first_line.h"
 # include "copie_first_line.h"
 # include "init_val.h"
+# include "search_the_big_one.h"
+# include "print_the_result.h"
 
 short	param(short action, short valu);
 short	ft_print_file(char *name);

@@ -6,7 +6,7 @@
 /*   By: fjanoty </var/mail/fjanoty>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 02:16:18 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 03:43:13 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 15:41:24 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include "print_file.h"
 # include "get_the_structure.h"
 
-short	copie_first_line(t_bin **tab, t_list *first_line, short i, short coef);
+short	copie_first_line(t_bin **tab, t_list *first_line);
 
 #endif

@@ -6,11 +6,12 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 13:28:02 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 04:32:01 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 20:01:53 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print_file.h"
+#include <stdio.h>
 
 t_bin	*malloc_line(short size)
 {
@@ -32,6 +33,7 @@ short	init_tab_bin(t_bin **tab)
 	short	j;
 	short	y_max;
 	short	nb_var;
+	short	i;
 
 	j = 1;
 	y_max = param(SIZE_Y, 0);
@@ -41,6 +43,12 @@ short	init_tab_bin(t_bin **tab)
 		tab[j] = malloc_line(nb_var);
 		if (!tab[j])
 			return (0);
+		i = 0;
+		while (i < nb_var)
+		{
+			tab[j][i] = 0;
+			i++;
+		}
 		j++;
 	}
 	return (1);
@@ -63,30 +71,39 @@ void	free_tab(t_bin **tab)
 
 short	ft_print_file(char *name)
 {
-	int					fd;
-	t_list				*line;
-	t_bin				**tab_bsq;
+	int		fd;
+	t_list	*line;
+	t_bin	**tab_bsq;
+	int	bug = 0;
 
+dprintf(1, "%d	est ok\n", ++bug);
 	if (name)
 		fd = open(name, O_RDONLY, S_IREAD);
 	else
 		fd = 0;
+dprintf(1, "%d	est ok\n", ++bug);
 	if(!init_param(fd))
 		return (-1);
+dprintf(1, "%d	est ok\n", ++bug);
 	get_first_line(&line, fd);
+dprintf(1, "%d	est ok\n", ++bug);
 	tab_bsq = (t_bin**)malloc(sizeof(t_bin*) * param(SIZE_Y, 0));
-	if(!copie_first_line(tab_bsq, line, 1, 1))
+dprintf(1, "%d	est ok\n", ++bug);
+	if(!copie_first_line(tab_bsq, line))
 		return (-1);
+dprintf(1, "%d	est ok\n", ++bug);
 	if (!init_tab_bin(tab_bsq))
 		return (-2);
+dprintf(1, "%d	est ok\n", ++bug);
 	if(!get_the_structure(tab_bsq, fd, param(SIZE_X, 0), param(SIZE_Y, 0)))
 		return (-1);
+dprintf(1, "%d	est ok\n", ++bug);
 	close(fd);
-//	on va remplir chaque bit manauant pour faire la liaison
-//	on aplique l'algo de recherche
-//		on cree deux ligne de int  pour contabiliser les score
-//		on cree garde en memoire POS et SIZE du dernier plus grand carre
-//	si toujours pas d'erreur on imprime la solution
+	if (search_the_big_one(tab_bsq))
+dprintf(1, "%d	est ok\n", ++bug);
+	print_the_result(tab_bsq);
+dprintf(1, "%d	est ok\n", ++bug);
 	free_tab(tab_bsq);
+dprintf(1, "%d	est ok\n", ++bug);
 	return (0);
 }

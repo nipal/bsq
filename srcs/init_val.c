@@ -6,11 +6,12 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:07:15 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 04:21:56 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 20:01:45 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init_val.h"
+#include <stdio.h>
 
 short	param(short action, short valu)
 {
@@ -21,15 +22,30 @@ short	param(short action, short valu)
 	static	char	vide = 0;
 
 	if (action == SIZE_X)
+	{
+//dprintf(1, "size_x: %d valu %d\n", size_x, valu);
 		return (size_x += valu);
+	}
 	if (action == SIZE_Y)
+	{
+dprintf(1, "size_y: %d valu %d\n", size_y, valu);
 		return (size_y += valu);
+	}
 	if (action == VIDE)
+	{
+//dprintf(1, "vide: '%c' valu %d\n", vide, valu);
 		return (vide += valu);
+	}
 	if (action == OBSTACLE)
+	{
+dprintf(1, "obstacle: '%c' valu %d\n", obstacle, valu);
 		return (obstacle += valu);
+	}
 	if (action == PLEIN)
+	{
+dprintf(1, "plein: '%c' valu %d\n", plein, valu);
 		return (plein += valu);
+	}
 	return (0);
 }
 
@@ -42,7 +58,7 @@ void	reste_param(void)
 	param(PLEIN, -param(PLEIN , 0));
 }
 
-short	ft_atoi_fd(int fd)
+char	ft_atoi_fd(int fd)
 {
 	char	c;
 	int		ok;
@@ -61,9 +77,9 @@ short	ft_atoi_fd(int fd)
 		ok = read(fd, &c, 1);
 	}
 	if (ok)
-		return (nb_line);
+		return (c);
 	else
-		return (- 1);
+		return (-1);
 }
 
 int		init_param(int fd)
@@ -73,7 +89,7 @@ int		init_param(int fd)
 	short	nb_line;
 
 	reste_param();
-	if ((nb_line = ft_atoi_fd(fd)) > 0)
+	if ((c = (nb_line = ft_atoi_fd(fd))) >= 0)
 		ok = 1;
 	else
 		ok = 0;

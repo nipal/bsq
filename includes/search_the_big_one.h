@@ -6,7 +6,7 @@
 /*   By: fjanoty </var/mail/fjanoty>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 02:07:31 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 05:14:21 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 17:01:24 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define SIZE 8
 
 short			big_sqr_data(short mode, short value);
-short			search_the_big_one(t_bin **tab, short y_max, short j);
+short			search_the_big_one(t_bin **tab);
+void			increm_max(short *line_work, short j);
+void			init_big_sqr(void);
 
 #endif

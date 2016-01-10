@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:45:29 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 05:07:34 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 17:41:03 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static	void	print_head(t_bin **tab, short x_max, short nb_var, short siz_bit)
 	short	i;
 	short	j;
 	short	k;
-	short	size;
 	char	c;
 
 	x_max = param(SIZE_X, 0);
@@ -68,7 +67,6 @@ static	void	print_between(t_bin **tab, short x_max, short nb_var, short siz_bit)
 	short	i;
 	short	j;
 	short	k;
-	short	size;
 	char	c;
 
 	x_max = param(SIZE_X, 0);
@@ -94,7 +92,6 @@ static	void	print_tail(t_bin **tab, short x_max ,short nb_var, short siz_bit)
 	short	i;
 	short	j;
 	short	k;
-	short	size;
 	char	c;
 
 	x_max = param(SIZE_X, 0);

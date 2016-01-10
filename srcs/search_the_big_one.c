@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 18:50:29 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 15:06:26 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 17:08:48 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@ static	short	init_var(short **line_temp, short **line_work, short *y_max)
 {
 	short	i;
 	short	max;
-	char	plein;
-	char	vide;
 
 	max = param(SIZE_X, 0);
 	*line_temp = (short*)malloc(sizeof(short) * max);
 	*line_work = (short*)malloc(sizeof(short) * max);
-	plein = param(PLEIN, 0);
-	vide = param(VIDE, 0);
+	*y_max = max;
 	i = 0;
 	while (i < max)
 	{
@@ -32,21 +29,6 @@ static	short	init_var(short **line_temp, short **line_work, short *y_max)
 			i++;
 	}
 	return (1);
-}
-
-short			big_sqr_data(short mode, short value)
-{
-	static	short	x = 0;
-	static	short	y = 0;
-	static	short	size = 0;
-
-	if(mode & X)
-		return ((mode & SET) ? x = value : x);
-	if(mode & Y)
-		return ((mode & SET) ? y = value : y);
-	if(mode & SIZE)
-		return ((mode & SET) ? size = value : size);
-	return (0);
 }
 
 static	short 	min_val(short *line_work, short *line_temp, short i)
@@ -60,51 +42,57 @@ static	short 	min_val(short *line_work, short *line_temp, short i)
 	a = line_work[i - 1];
 	b = line_temp[i];
 	c = line_temp[i - 1];
+	if (a < b && a < c)
+		return (a);
+	if (b < a && b < c)
+		return (b);
+	else
+		return (c);
+}
+
+
+t_bin			def_val(t_bin **tab, short j, short i, short max)
+{
+	t_bin	val;
+	t_bin	a;
+	t_bin	b;
+	t_bin	c;
+	t_bin	d;
+
+
+	a = tab[j][i];
+	b = tab[j - 1][i];
+	if (i)
+	{
+		c = (tab[j][i] << 1) | ((tab[j][i - 1] & 1 << max) >> max);
+		d = (tab[j - 1][i] << 1) | ((tab[j - 1][i - 1] & 1 << max) >> max);
+	}
 	else
 	{
-		if (a < b && a < c)
-			return (a);
-		if (b < a && b < c)
-			return (b);
-		else
-			return (c);
+		c = tab[j][i] << 1;
+		d = tab[j - 1][i] << 1;
 	}
+	val = a & b & c & d;
+	return (val);
 }
 
-static	void	increm_max(short *line_work, i)
+static	void	increm_num_line(t_bin **tab, short *line_temp, short *line_work
+		, short j)
 {
-	short	x_max;
+	short	i;
+	short	nb_var;
+	short	k;
+	t_bin	val;
 	short	max;
 
-	max = (big_sqr_data(SIZE, 0))
-	x_max = param(SIZE_X, 0);
-	while (i < x_max)
-	{
-		if (line_work[i] > max)
-		{
-			big_sqr_data(SET | SIZE, line_work[i]);
-			big_sqr_data(SET | X, i);
-			big_sqr_data(SET | Y, j);
-		}
-		i++;
-	}
-}
-
-static	void	increm_num_line(t_bin **tab, short *line_temp, short *line_work, short j)
-{
-	short			i;
-	static	short	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)) - 1)) + 1;
-	short			k;
-	static			t_bin	val = 0;
-	short			max;
-
+	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)) - 1)) + 1;
 	i = -1;
-	max = (sizeof(t_bin) * 8) - BIT_LESS;
+	max = (sizeof(t_bin) * 8) - 1;
 	while (++i < nb_var)
 	{
 		k = -1;
 		if (j)
-			val = (tab[j][i] & tab[j - 1][i] & tab[j][i] >> 1 & tab[j - 1][i] >> 1);
+			val = def_val(tab, j, i, max);
 		while (++k < max)
 		{
 			if (j && (val & 1 << k))
@@ -112,10 +100,10 @@ static	void	increm_num_line(t_bin **tab, short *line_temp, short *line_work, sho
 			else if (tab[j][i] & 1 << k)
 				line_work[i * max + k] = 1;
 			else
-				line_work[i * max + k] = 0
+				line_work[i * max + k] = 0;
 		}
-		increm_max(line_work, i);
 	}
+		increm_max(line_work, j);
 }
 
 short			search_the_big_one(t_bin **tab)
@@ -126,6 +114,7 @@ short			search_the_big_one(t_bin **tab)
 	short	j;
 
 	j = 0;
+	init_big_sqr();
 	init_var(&line_temp, &line_work, &y_max);
 	if (!line_temp || !line_work)
 		return (-2);

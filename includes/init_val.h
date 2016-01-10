@@ -6,7 +6,7 @@
 /*   By: fjanoty </var/mail/fjanoty>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 02:13:55 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 05:02:06 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/10 17:37:15 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 short	param(short action, short valu);
 void	reste_param(void);
-short	ft_atoi_fd(int fd);
+char	ft_atoi_fd(int fd);
 int		init_param(int fd);
 
 #endif
