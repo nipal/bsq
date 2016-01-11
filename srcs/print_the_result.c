@@ -13,6 +13,15 @@
 #include "print_the_result.h"
 #include <stdio.h>
 
+void	print_all();
+void	print_all_sqr()
+{
+dprintf(1, "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
+dprintf(1, "sqr-x	%d\n", big_sqr_data(X, 0));
+dprintf(1, "sqr-y	%d\n", big_sqr_data(Y, 0));
+dprintf(1, "size	%d\n", big_sqr_data(SIZE, 0));
+dprintf(1, "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
+}
 static	char	what_char(t_bin *tab, short i, short k, short j)
 {
 	short	indice;
@@ -46,6 +55,7 @@ static	void	print_between(t_bin **tab, short nb_var, short siz_bit)
 
 	y_max = param(SIZE_Y, 0);
 	j = -1;
+dprintf(1 , "i: %d v: %d\n",(i * siz_bit + k), (param(SIZE_X, 0)));
 	while (++j < y_max)
 	{
 		i = -1;
@@ -55,6 +65,7 @@ static	void	print_between(t_bin **tab, short nb_var, short siz_bit)
 			k = -1;
 			while (++k < siz_bit && i * siz_bit + k < param(SIZE_X, 0))
 			{
+//dprintf(1 , " |%d|",(i * siz_bit + k));
 				c = what_char(tab[j], i, k, j);
 				write(1, &c, 1);
 			}
@@ -73,7 +84,9 @@ void	print_the_result(t_bin **tab)
 	short	nb_var;
 	short	siz_bit;
 
-	siz_bit =  ((sizeof(t_bin) * 8) - 1);
+print_all_sqr();
+	siz_bit =  ((sizeof(t_bin) * 8));
 	nb_var = ((param(SIZE_X, 0) - 1) / siz_bit) + 1;
+print_all();
 	print_between(tab, nb_var, siz_bit);
 }

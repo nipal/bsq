@@ -17,7 +17,7 @@ static	short	init_var(short **line_temp, short **line_work, short *y_max)
 	short	i;
 	short	max;
 
-	max = param(SIZE_X, 0);
+	max = param(SIZE_Y, 0);
 	*line_temp = (short*)malloc(sizeof(short) * max);
 	*line_work = (short*)malloc(sizeof(short) * max);
 	*y_max = max;

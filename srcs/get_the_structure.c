@@ -31,8 +31,8 @@ short	fill_the_char(char c, t_bin *line_b, t_bin max, short init)
 		coef = coef << 1;
 	else
 	{
-		if (i_b < ((param(SIZE_X, 0) - 1) / max))
-			line_b[i_b] += (line_b[i_b + 1] & 1) << max;
+		if (i_b < (((param(SIZE_X, 0) - 1) / max) + 1))
+			line_b[i_b] += ((line_b[i_b + 1]) & 1) << max;
 		i_b++;
 		coef = 1;
 	}
@@ -44,13 +44,26 @@ short	fill_line_bin(t_bin *line_bin, char *line_char, short x_max, short i_c)
 	static	t_bin	max = 1 << ((8 * sizeof(t_bin)) - 1);
 
 	fill_the_char(0, 0, 0, 1);
-	while (i_c < x_max)
+	while (i_c < x_max + 1)
 	{
+dprintf(1 , " |%d|",(i_c));
 		if(!fill_the_char(line_char[i_c], line_bin, max, 0))
 			return (0);
 		i_c++;
 	}
+dprintf(1 , "\n");
 	return (1);
+}
+
+void	print_all()
+{
+dprintf(1, "==========================================================================================================================\n");
+dprintf(1, "size-x		: %d\n", param(SIZE_X, 0));
+dprintf(1, "size-y		: %d\n", param(SIZE_Y, 0));
+dprintf(1, "obstacle	: %c\n", param(OBSTACLE, 0));
+dprintf(1, "vide		: %c\n", param(VIDE, 0));
+dprintf(1, "plein		: %c\n", param(PLEIN, 0));
+dprintf(1, "==========================================================================================================================\n");
 }
 
 short	get_the_structure(t_bin **tab, int fd, short x_max, short y_max)
@@ -61,25 +74,26 @@ short	get_the_structure(t_bin **tab, int fd, short x_max, short y_max)
 int line_bug = 0;
 int boucle_bug = 0;
 
+print_all();
 	j = 1;
-//dprintf(1, "get the structure line %d et ymax: %d  %d\n", j, y_max, ++line_bug);
+dprintf(1, "get the structure line %d et ymax: %d  %d\n", j, y_max, ++line_bug);
 	line = (char*)malloc(sizeof(char) * (x_max + 1));
 	if (!line)
 	{
 dprintf(1, "Mauvais malloc\n");
 		return (0);
 	}
-//dprintf(1, "get the structure line ok pour %d\n", ++line_bug);
-	while (j < (y_max - 3))
+dprintf(1, "get the structure line ok pour %d\n", ++line_bug);
+	while (j < (y_max))
 	{
-//dprintf(1, "get the structure j: %d boucle %d\n", j, ++boucle_bug);
+dprintf(1, "get the structure j: %d boucle %d\n", j, ++boucle_bug);
 		oct_lu = read(fd, line, x_max + 1);
 		if (oct_lu != x_max + 1)
 		{
 dprintf(1, "mauvais oct_lu: %d pour fd: %d x_max: %d\n", oct_lu, fd, x_max);
 			return (0);
 		}
-		if(fill_line_bin(tab[j], line, x_max, 0) == -1)
+		if(fill_line_bin(tab[j], line, x_max, 0))
 		{
 dprintf(1, "mauvais carracter\n");
 			return (0);
