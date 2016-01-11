@@ -28,7 +28,7 @@ short	param(short action, short valu)
 	}
 	if (action == SIZE_Y)
 	{
-dprintf(1, "***************************************************************************  size_y: %d valu %d\n", size_y, valu);
+//dprintf(1, "***************************************************************************  size_y: %d valu %d\n", size_y, valu);
 		return (size_y += valu);
 	}
 	if (action == VIDE)

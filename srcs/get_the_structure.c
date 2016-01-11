@@ -25,7 +25,7 @@ short	fill_the_char(char c, t_bin *line_b, t_bin max, short init)
 	}
 	if (c == param(VIDE, 0))
 		line_b[i_b] += coef;
-	else if (c != param(PLEIN, 0))
+	else if (c != param(OBSTACLE, 0))
 		return (0);
 	if (coef < max)
 		coef = coef << 1;
@@ -41,10 +41,9 @@ short	fill_the_char(char c, t_bin *line_b, t_bin max, short init)
 
 short	fill_line_bin(t_bin *line_bin, char *line_char, short x_max, short i_c)
 {
-	t_bin			coef;
 	static	t_bin	max = 1 << ((8 * sizeof(t_bin)) - 1);
 
-	coef = 1;
+	fill_the_char(0, 0, 0, 1);
 	while (i_c < x_max)
 	{
 		if(!fill_the_char(line_char[i_c], line_bin, max, 0))

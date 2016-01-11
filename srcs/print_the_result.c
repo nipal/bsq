@@ -11,75 +11,51 @@
 /* ************************************************************************** */
 
 #include "print_the_result.h"
+#include <stdio.h>
 
-static	void	print_head(t_bin **tab, short x_max, short nb_var, short siz_bit)
+static	char	what_char(t_bin *tab, short i, short k, short j)
 {
-	short	i;
-	short	j;
-	short	k;
-	char	c;
-
-	x_max = param(SIZE_X, 0);
-	j = -1;
-	while (++j < big_sqr_data(Y, 0) - big_sqr_data(SIZE, 0))
-	{
-		i = -1;
-		while (++i < nb_var)
-		{
-			k = -1;
-			while (++k < siz_bit && i * siz_bit + k < param(SIZE_X, 0))
-			{
-				if (tab[j][i] & 1 << k)
-					c = param(VIDE, 0);
-				else
-					c = param(OBSTACLE, 0);
-				write(1, &c, 1);
-			}
-		}
-		write(1, "\n", 1);
-	}
-}
-
-static	char	what_char(t_bin *tab, short i, short k)
-{
-	char			c;
-	short			indice;
+	short	indice;
 	short	max;
-	short	sqr_x;
 	short	sqr_size;
+	short	sqr_x;
+	short	sqr_y;
 
 	max = param(SIZE_X, 0);
 	sqr_x = big_sqr_data(X, 0);
+	sqr_y = big_sqr_data(Y, 0);
 	sqr_size = big_sqr_data(SIZE, 0);
 
 	indice = ((i * ((8 * sizeof(t_bin)) - 1)) + k);
-	if (indice >= sqr_x - sqr_size && indice <= sqr_x)
-		c = param(PLEIN, 0);
+	if (indice > sqr_x - sqr_size && indice <= sqr_x
+	&& j > sqr_y - sqr_size && j <= sqr_y )
+		return (param(PLEIN, 0));
 	else if (tab[i] & 1 << k)
-		c = param(VIDE, 0);
+		return (param(VIDE, 0));
 	else
-		c = param(OBSTACLE, 0);
-	return (c);
+		return (param(OBSTACLE, 0));
 }
 
-static	void	print_between(t_bin **tab, short x_max, short nb_var, short siz_bit)
+static	void	print_between(t_bin **tab, short nb_var, short siz_bit)
 {
 	short	i;
 	short	j;
 	short	k;
+	short	y_max;
 	char	c;
 
-	x_max = param(SIZE_X, 0);
-	j = big_sqr_data(Y, 0);
-	while (++j < param(SIZE_Y, 0))
+	y_max = param(SIZE_Y, 0);
+	j = -1;
+	while (++j < y_max)
 	{
 		i = -1;
+		dprintf(1, "line %d	", j);
 		while (++i < nb_var)
 		{
 			k = -1;
 			while (++k < siz_bit && i * siz_bit + k < param(SIZE_X, 0))
 			{
-				c = what_char(tab[j], i, k);
+				c = what_char(tab[j], i, k, j);
 				write(1, &c, 1);
 			}
 		}
@@ -87,32 +63,9 @@ static	void	print_between(t_bin **tab, short x_max, short nb_var, short siz_bit)
 	}
 }
 
-static	void	print_tail(t_bin **tab, short x_max ,short nb_var, short siz_bit)
+void	recap()
 {
-	short	i;
-	short	j;
-	short	k;
-	char	c;
-
-	x_max = param(SIZE_X, 0);
-	j = big_sqr_data(Y, 0);
-	while (++j < param(SIZE_Y, 0))
-	{
-		i = -1;
-		while (++i < nb_var)
-		{
-			k = -1;
-			while (++k < siz_bit && i * siz_bit + k < param(SIZE_X, 0))
-			{
-				if (tab[j][i] & 1 << k)
-					c = param(VIDE, 0);
-				else
-					c = param(OBSTACLE, 0);
-				write(1, &c, 1);
-			}
-		}
-		write(1, "\n", 1);
-	}
+	dprintf(1, "larhgeur %d\n", param(SIZE_X, 0));
 }
 
 void	print_the_result(t_bin **tab)
@@ -122,7 +75,5 @@ void	print_the_result(t_bin **tab)
 
 	siz_bit =  ((sizeof(t_bin) * 8) - 1);
 	nb_var = ((param(SIZE_X, 0) - 1) / siz_bit) + 1;
-	print_head(tab, nb_var, 0, siz_bit);
-	print_between(tab, 0, nb_var, siz_bit);
-	print_tail(tab, 0, nb_var, siz_bit);
+	print_between(tab, nb_var, siz_bit);
 }
