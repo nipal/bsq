@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "init_val.h"
-#include <stdio.h>
 
 short	param(short action, short valu)
 {
@@ -22,30 +21,15 @@ short	param(short action, short valu)
 	static	char	vide = 0;
 
 	if (action == SIZE_X)
-	{
-//dprintf(1, "size_x: %d valu %d\n", size_x, valu);
 		return (size_x += valu);
-	}
 	if (action == SIZE_Y)
-	{
-//dprintf(1, "***************************************************************************  size_y: %d valu %d\n", size_y, valu);
 		return (size_y += valu);
-	}
 	if (action == VIDE)
-	{
-//dprintf(1, "vide: '%c' valu %d\n", vide, valu);
 		return (vide += valu);
-	}
 	if (action == OBSTACLE)
-	{
-//dprintf(1, "obstacle: '%c' valu %d\n", obstacle, valu);
 		return (obstacle += valu);
-	}
 	if (action == PLEIN)
-	{
-//dprintf(1, "plein: '%c' valu %d\n", plein, valu);
 		return (plein += valu);
-	}
 	return (0);
 }
 
@@ -77,7 +61,6 @@ char	ft_atoi_fd(int fd , char *c)
 	{
 		nb_line *= 10;
 		nb_line += *c - '0';
-dprintf(1, "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++yyy_max: %d\n", nb_line);
 		ok = read(fd, c, 1);
 	}
 	if (ok)

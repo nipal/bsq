@@ -13,6 +13,6 @@
 #ifndef T_BIN_H
 # define T_BIN_H
 
-typedef	unsigned char t_bin;
+typedef	 unsigned char	t_bin;
 
 #endif

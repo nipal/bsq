@@ -27,24 +27,13 @@ short			big_sqr_data(short mode, short value)
 	return (0);
 }
 
-void			increm_max(short *line_work, short j)
+void			increm_max(short *line_work, short j, short i)
 {
-	short	x_max;
-	short	max;
-	short	i;
-
-	i = 0;
-	max = (big_sqr_data(SIZE, 0));
-	x_max = param(SIZE_X, 0);
-	while (i < x_max)
+	if (line_work[i] >=  (big_sqr_data(SIZE, 0)) + 1)
 	{
-		if (line_work[i] > max)
-		{
-			big_sqr_data(SET | SIZE, line_work[i]);
-			big_sqr_data(SET | X, i);
-			big_sqr_data(SET | Y, j);
-		}
-		i++;
+		big_sqr_data(SET | SIZE, line_work[i]);
+		big_sqr_data(SET | X, i);
+		big_sqr_data(SET | Y, j);
 	}
 }
 

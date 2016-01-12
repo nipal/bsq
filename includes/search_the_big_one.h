@@ -22,8 +22,8 @@
 # define SIZE 8
 
 short			big_sqr_data(short mode, short value);
-short			search_the_big_one(t_bin **tab);
-void			increm_max(short *line_work, short j);
+short			solve(t_bin **tab, short y_max, short x_max);
+void			increm_max(short *line_work, short j, short i);
 void			init_big_sqr(void);
 
 #endif

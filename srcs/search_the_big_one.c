@@ -12,15 +12,16 @@
 
 #include "search_the_big_one.h"
 
-static	short	init_var(short **line_temp, short **line_work, short *y_max)
+static	short	init_var2(short **line_temp, short **line_work, short *size_bin)
 {
 	short	i;
 	short	max;
 
-	max = param(SIZE_Y, 0);
+	*size_bin = ((8 * sizeof(t_bin)));
+	init_big_sqr();
+	max = param(SIZE_X, 0);
 	*line_temp = (short*)malloc(sizeof(short) * max);
 	*line_work = (short*)malloc(sizeof(short) * max);
-	*y_max = max;
 	i = 0;
 	while (i < max)
 	{
@@ -31,100 +32,56 @@ static	short	init_var(short **line_temp, short **line_work, short *y_max)
 	return (1);
 }
 
-static	short 	min_val(short *line_work, short *line_temp, short i)
+static	short 	min_val(short *line_work, short *line_temp, short i, short j)
 {
 	short	a;
 	short	b;
 	short	c;
 
-	if (i == 0)
+	if (i == 0 || j == 0)
 		return (0);
 	a = line_work[i - 1];
 	b = line_temp[i];
 	c = line_temp[i - 1];
-	if (a < b && a < c)
-		return (a);
-	if (b < a && b < c)
-		return (b);
-	else
-		return (c);
+	a = (a > b) ? b : a ;
+	a = (a > c) ? c : a ;
+	return (a);	
 }
 
-
-t_bin			def_val(t_bin **tab, short j, short i, short max)
+static	void	swap_line(short **str1, short **str2)
 {
-	t_bin	val;
-	t_bin	a;
-	t_bin	b;
-	t_bin	c;
-	t_bin	d;
+	short	*str_swp;
 
-
-	a = tab[j][i];
-	b = tab[j - 1][i];
-	if (i)
-	{
-		c = (tab[j][i] << 1) | ((tab[j][i - 1] & 1 << max) >> max);
-		d = (tab[j - 1][i] << 1) | ((tab[j - 1][i - 1] & 1 << max) >> max);
-	}
-	else
-	{
-		c = tab[j][i] << 1;
-		d = tab[j - 1][i] << 1;
-	}
-	val = a & b & c & d;
-	return (val);
+	str_swp = *str1;
+	*str1 = *str2;
+	*str2 = str_swp;
 }
 
-static	void	increm_num_line(t_bin **tab, short *line_temp, short *line_work
-		, short j)
-{
-	short	i;
-	short	nb_var;
-	short	k;
-	t_bin	val;
-	short	max;
-
-	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)) - 1)) + 1;
-	i = -1;
-	max = (sizeof(t_bin) * 8) - 1;
-	while (++i < nb_var)
-	{
-		k = -1;
-		if (j)
-			val = def_val(tab, j, i, max);
-		while (++k < max)
-		{
-			if (j && (val & 1 << k))
-				line_work[i * max + k] = 1 + min_val(line_work, line_temp, i * max + k);
-			else if (tab[j][i] & 1 << k)
-				line_work[i * max + k] = 1;
-			else
-				line_work[i * max + k] = 0;
-		}
-	}
-		increm_max(line_work, j);
-}
-
-short			search_the_big_one(t_bin **tab)
+short			solve(t_bin **tab, short y_max, short x_max)
 {
 	short	*line_temp;
 	short	*line_work;
-	short	y_max;
 	short	j;
-
-	j = 0;
-	init_big_sqr();
-	init_var(&line_temp, &line_work, &y_max);
+	short	i;
+	short	size_bin;
+	
+	j = -1;
+	init_var2(&line_temp, &line_work, &size_bin);
 	if (!line_temp || !line_work)
 		return (-2);
-	while (j < y_max)
+	while (++j < y_max)
 	{
-		if (j % 2 == 0)
-			increm_num_line(tab, line_temp, line_work, j);
-		else
-			increm_num_line(tab, line_work, line_temp, j);
-		j++;
+		i = -1;
+		while (++i < x_max)
+		{
+			if ((tab[j][i / size_bin] & (1 << (i % size_bin))))
+				line_work[i] = 1 + min_val(line_work, line_temp, i, j);
+			else
+				line_work[i] = 0;
+			increm_max(line_work, j, i);
+		}
+		swap_line(&line_work, &line_temp);
+		
 	}
 	return (0);
 }

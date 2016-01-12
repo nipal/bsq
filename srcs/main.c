@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "main.h"
-#include <stdio.h>
 
 int		main(int ac, char **av)
 {
@@ -26,7 +25,6 @@ int		main(int ac, char **av)
 			ft_puterror("map error\n");
 		else if (err == -2)
 			ft_puterror("memory error\n");
-		dprintf(1, "non");
 	}
 	while (i < ac)
 	{
