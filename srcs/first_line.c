@@ -16,9 +16,7 @@ void	get_first_line(t_list **line, int fd)
 {
 	int		oct_lu;
 	char	*c;
-	int line_bug = 0;
 
-	line_bug = -1;
 	*line = 0;
 	c = (char*)malloc(sizeof(char) * 2);
 	c[1] = 0;

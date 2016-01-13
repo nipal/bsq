@@ -71,6 +71,8 @@ short	get_the_structure(t_bin **tab, int fd, short x_max, short y_max)
 			return (0);
 		j++;
 	}
+	if (read(fd, line, 1))
+		return (0);
 	free(line);
 	return (1);
 }

@@ -15,12 +15,10 @@
 static	char	what_char(t_bin *tab, short i, short k, short j)
 {
 	short	indice;
-	short	max;
 	short	sqr_size;
 	short	sqr_x;
 	short	sqr_y;
 
-	max = param(SIZE_X, 0);
 	sqr_x = big_sqr_data(X, 0);
 	sqr_y = big_sqr_data(Y, 0);
 	sqr_size = big_sqr_data(SIZE, 0);

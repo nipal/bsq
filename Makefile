@@ -37,7 +37,7 @@ FLAG = -Wall -Wextra -Werror
 all : $(NAME)
 
 $(NAME) :
-	gcc  $(SRC) -I includes -o $(NAME)
+	gcc $(FLAG) $(SRC) -I includes -o $(NAME)
 clean :
 
 fclean :

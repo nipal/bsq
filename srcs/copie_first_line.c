@@ -16,8 +16,6 @@ short	copie_first_line(t_bin **tab, t_list *first_line)
 {
 	short	nb_var;
 	t_bin	max;
-	int	bug = 0;
-	int	boucle = 0;
 	
 	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)) - 1)) + 1;
 	tab[0] = malloc_line(nb_var);

@@ -74,7 +74,6 @@ short	ft_print_file(char *name)
 	int		fd;
 	t_list	*line;
 	t_bin	**tab_bsq;
-	int	bug = 0;
 
 	if (name)
 		fd = open(name, O_RDONLY, S_IREAD);
