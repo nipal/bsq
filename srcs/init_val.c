@@ -12,10 +12,10 @@
 
 #include "init_val.h"
 
-short	param(short action, short valu)
+int		param(int action, int valu)
 {
-	static	short	size_x = 0;
-	static	short	size_y = 0;
+	static	int		size_x = 0;
+	static	int		size_y = 0;
 	static	char	obstacle = 0;
 	static	char	plein = 0;
 	static	char	vide = 0;
@@ -42,16 +42,16 @@ void	reste_param(void)
 	param(PLEIN, -param(PLEIN , 0));
 }
 
-char	ft_atoi_fd(int fd , char *c)
+int		ft_atoi_fd(int fd , char *c)
 {
 	int		ok;
-	short	nb_line;
-	short	coef;
+	int		nb_line;
+	int		coef;
 	
 	coef = 1;
 	ok = read(fd, c, 1);
 	nb_line = 0;
-	while (ok && ((*c >= 19 && *c <= 13) || *c == 32))
+	while (ok && ((*c >= 9 && *c <= 13) || *c == 32))
 		ok = read(fd, c, 1);
 	if (ok && *c == '+' )
 		ok = read(fd, c, 1);
@@ -60,7 +60,7 @@ char	ft_atoi_fd(int fd , char *c)
 	while (ok && *c >= '0' && *c <= '9')
 	{
 		nb_line *= 10;
-		nb_line += *c - '0';
+		nb_line += (int)(*c - '0');
 		ok = read(fd, c, 1);
 	}
 	if (ok)
@@ -73,7 +73,7 @@ int		init_param(int fd)
 {
 	char	c;
 	int		ok;
-	short	nb_line;
+	int		nb_line;
 
 	reste_param();
 	if (((nb_line = ft_atoi_fd(fd , &c))) >= 0)

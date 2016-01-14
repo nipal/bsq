@@ -18,5 +18,8 @@
 int		ft_strlen(char *str);
 void	ft_puterror(char *str);
 void	ft_putstr(unsigned char *str, int nb_char);
+void	putnbr62(short nbr);
+
+# define CHAINE "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 #endif

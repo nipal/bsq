@@ -31,3 +31,16 @@ void	ft_putstr(unsigned char *str, int nb_char)
 {
 	write(1, str, nb_char);
 }
+
+void	putnbr62(short nbr)
+{
+	static	char	base[63] = CHAINE;
+	if (nbr < 0)
+	{
+		write(1, "-", 1);
+		nbr *= -1;
+	}
+	if (nbr >= 62)
+		putnbr62(nbr / 62);
+	write(1, base + (nbr % 62),1);
+}

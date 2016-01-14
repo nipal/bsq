@@ -20,9 +20,9 @@
 # define OBSTACLE 16
 # define PLEIN 32
 
-short	param(short action, short valu);
+int		param(int action, int valu);
 void	reste_param(void);
-char	ft_atoi_fd(int fd, char *c);
+int		ft_atoi_fd(int fd, char *c);
 int		init_param(int fd);
 
 #endif

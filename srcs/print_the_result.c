@@ -12,33 +12,30 @@
 
 #include "print_the_result.h"
 
-static	char	what_char(t_bin *tab, short i, short k, short j)
+static	char	what_char(t_bin *tab, int i, int j, int size_b)
 {
-	short	indice;
-	short	sqr_size;
-	short	sqr_x;
-	short	sqr_y;
+	int		sqr_size;
+	int		sqr_x;
+	int		sqr_y;
 
-	sqr_x = big_sqr_data(X, 0);
 	sqr_y = big_sqr_data(Y, 0);
+	sqr_x = big_sqr_data(X, 0);
 	sqr_size = big_sqr_data(SIZE, 0);
+	size_b = sizeof(t_bin) * 8;
 
-	indice = ((i * ((8 * sizeof(t_bin)) - 1)) + k);
-
-	if (indice > (sqr_x - sqr_size) && indice <= sqr_x
-	&& j > sqr_y - sqr_size && j <= sqr_y )
+	if (i > (sqr_x - sqr_size) && i <= sqr_x
+	&& j > (sqr_y - sqr_size) && j <= sqr_y )
 		return (param(PLEIN, 0));
-	if (tab[i] & 1 << k)
+	if (tab[i / size_b] & 1 << (i % size_b))
 		return (param(VIDE, 0));
 	return (param(OBSTACLE, 0));
 }
 
-static	void	print_between(t_bin **tab, short nb_var, short siz_bit)
+static	void	print_between(t_bin **tab, int nb_var, int siz_bit)
 {
-	short	i;
-	short	j;
-	short	k;
-	short	y_max;
+	int		i;
+	int		j;
+	int		y_max;
 	char	c;
 
 	y_max = param(SIZE_Y, 0);
@@ -48,12 +45,8 @@ static	void	print_between(t_bin **tab, short nb_var, short siz_bit)
 		i = -1;
 		while (++i < nb_var)
 		{
-			k = -1;
-			while (++k < siz_bit && i * siz_bit + k < param(SIZE_X, 0))
-			{
-				c = what_char(tab[j], i, k, j);
-				write(1, &c, 1);
-			}
+			c = what_char(tab[j], i, j, siz_bit);
+			write(1, &c, 1);
 		}
 		write(1, "\n", 1);
 	}
@@ -61,10 +54,8 @@ static	void	print_between(t_bin **tab, short nb_var, short siz_bit)
 
 void	print_the_result(t_bin **tab)
 {
-	short	nb_var;
-	short	siz_bit;
+	int		siz_bit;
 
 	siz_bit =  ((sizeof(t_bin) * 8));
-	nb_var = ((param(SIZE_X, 0) - 1) / siz_bit) + 1;
-	print_between(tab, nb_var, siz_bit);
+	print_between(tab, param(SIZE_X, 0), siz_bit);
 }

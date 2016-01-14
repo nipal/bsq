@@ -26,10 +26,10 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-short	param(short action, short valu);
-short	ft_print_file(char *name);
+int		param(int action, int valu);
+int		ft_print_file(char *name);
 void	reste_param(void);
 int		init_param(int fd);
-t_bin	*malloc_line(short nb_var);
+t_bin	*malloc_line(int nb_var);
 #endif
 

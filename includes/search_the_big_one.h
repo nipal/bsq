@@ -21,9 +21,9 @@
 # define Y 4
 # define SIZE 8
 
-short			big_sqr_data(short mode, short value);
-short			solve(t_bin **tab, short y_max, short x_max);
-void			increm_max(short *line_work, short j, short i);
+int				big_sqr_data(int mode, int value);
+int				solve(t_bin **tab, int y_max, int x_max);
+void			increm_max(int *line_work, int j, int i);
 void			init_big_sqr(void);
 
 #endif

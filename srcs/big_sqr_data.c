@@ -12,11 +12,11 @@
 
 #include "search_the_big_one.h"
 
-short			big_sqr_data(short mode, short value)
+int				big_sqr_data(int mode, int value)
 {
-	static	short	x = 0;
-	static	short	y = 0;
-	static	short	size = 0;
+	static	int		x = 0;
+	static	int		y = 0;
+	static	int		size = 0;
 
 	if(mode & X)
 		return ((mode & SET) ? x = value : x);
@@ -27,7 +27,7 @@ short			big_sqr_data(short mode, short value)
 	return (0);
 }
 
-void			increm_max(short *line_work, short j, short i)
+void			increm_max(int *line_work, int j, int i)
 {
 	if (line_work[i] >=  (big_sqr_data(SIZE, 0)) + 1)
 	{

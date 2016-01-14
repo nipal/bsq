@@ -12,16 +12,16 @@
 
 #include "search_the_big_one.h"
 
-static	short	init_var2(short **line_temp, short **line_work, short *size_bin)
+static	int		init_var2(int **line_temp, int **line_work, int *size_bin)
 {
-	short	i;
-	short	max;
+	int		i;
+	int		max;
 
 	*size_bin = ((8 * sizeof(t_bin)));
 	init_big_sqr();
 	max = param(SIZE_X, 0);
-	*line_temp = (short*)malloc(sizeof(short) * max);
-	*line_work = (short*)malloc(sizeof(short) * max);
+	*line_temp = (int*)malloc(sizeof(int) * max);
+	*line_work = (int*)malloc(sizeof(int) * max);
 	i = 0;
 	while (i < max)
 	{
@@ -32,11 +32,11 @@ static	short	init_var2(short **line_temp, short **line_work, short *size_bin)
 	return (1);
 }
 
-static	short 	min_val(short *line_work, short *line_temp, short i, short j)
+static	int 	min_val(int *line_work, int *line_temp, int i, int j)
 {
-	short	a;
-	short	b;
-	short	c;
+	int		a;
+	int		b;
+	int		c;
 
 	if (i == 0 || j == 0)
 		return (0);
@@ -48,22 +48,54 @@ static	short 	min_val(short *line_work, short *line_temp, short i, short j)
 	return (a);	
 }
 
-static	void	swap_line(short **str1, short **str2)
+
+t_bin			def_val(t_bin **tab, int j, int i, int max)
 {
-	short	*str_swp;
+	t_bin	val;
+	t_bin	a;
+	t_bin	b;
+	t_bin	c;
+	t_bin	d;
+
+
+	a = tab[j][i];
+	b = tab[j - 1][i];
+	if (i)
+	{
+		c = (tab[j][i] << 1) | ((tab[j][i - 1] & 1 << max) >> max);
+		d = (tab[j - 1][i] << 1) | ((tab[j - 1][i - 1] & 1 << max) >> max);
+	}
+	else
+	{
+		c = tab[j][i] << 1;
+		d = tab[j - 1][i] << 1;
+	}
+	val = a & b & c & d;
+	return (val);
+}
+
+static	void	swap_line(int **str1, int **str2)
+{
+	int		*str_swp;
 
 	str_swp = *str1;
 	*str1 = *str2;
 	*str2 = str_swp;
 }
 
-short			solve(t_bin **tab, short y_max, short x_max)
+void			free_mem(int *mem1, int *mem2)
 {
-	short	*line_temp;
-	short	*line_work;
-	short	j;
-	short	i;
-	short	size_bin;
+	free(mem1);
+	free(mem2);
+}
+
+int				solve(t_bin **tab, int y_max, int x_max)
+{
+	int		*line_temp;
+	int		*line_work;
+	int		j;
+	int		i;
+	int		size_bin;
 	
 	j = -1;
 	init_var2(&line_temp, &line_work, &size_bin);
@@ -74,14 +106,13 @@ short			solve(t_bin **tab, short y_max, short x_max)
 		i = -1;
 		while (++i < x_max)
 		{
-			if ((tab[j][i / size_bin] & (1 << (i % size_bin))))
+			if ((tab[j][i / (size_bin)] & (1 << (i % size_bin))))
 				line_work[i] = 1 + min_val(line_work, line_temp, i, j);
 			else
 				line_work[i] = 0;
 			increm_max(line_work, j, i);
 		}
 		swap_line(&line_work, &line_temp);
-		
 	}
 	return (0);
 }

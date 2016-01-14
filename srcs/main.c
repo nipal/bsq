@@ -14,8 +14,8 @@
 
 int		main(int ac, char **av)
 {
-	short	err;
-	short	i;
+	int		err;
+	int		i;
 
 	i = 1;
 	if (ac == 1)

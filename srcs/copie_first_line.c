@@ -12,18 +12,16 @@
 
 #include "copie_first_line.h"
 
-short	copie_first_line(t_bin **tab, t_list *first_line)
+int		copie_first_line(t_bin **tab, t_list *first_line)
 {
-	short	nb_var;
-	t_bin	max;
+	int		nb_var;
 	
-	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)) - 1)) + 1;
+	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin)))) + 1;
 	tab[0] = malloc_line(nb_var);
-	max = 1 << (8 * sizeof(t_bin) - 1);
-	fill_the_char(0, 0, 0, 1);
+	fill_the_char(0, 0, 1);
 	while (first_line)
 	{
-		if(fill_the_char((*(char*)(first_line->data)), tab[0], max, 0) == -1)
+		if(fill_the_char((*(char*)(first_line->data)), tab[0], 0) == -1)
 			return (0);
 		first_line = first_line->next;
 	}

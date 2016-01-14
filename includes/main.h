@@ -22,9 +22,3 @@
 # include "ft_ft.h"
 
 #endif
-//	definir les constan des fonction de varible blogale pour init_val.h et get_the_tructure.h
-//	un peu ameliorer print the result
-//	se lancer dans le debuggage
-//
-//	PROAGRME DU DEBUGUE
-//		tester les decalage de bit, 

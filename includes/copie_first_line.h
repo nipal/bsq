@@ -20,6 +20,6 @@
 # include "print_file.h"
 # include "get_the_structure.h"
 
-short	copie_first_line(t_bin **tab, t_list *first_line);
+int		copie_first_line(t_bin **tab, t_list *first_line);
 
 #endif

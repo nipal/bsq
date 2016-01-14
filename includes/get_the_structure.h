@@ -18,8 +18,8 @@
 # include "init_val.h"
 # include <unistd.h>
 
-short	fill_the_char(char c, t_bin *line_b, t_bin max, short init);
-short	get_the_structure(t_bin **tab, int fd, short x_max, short y_max);
-short	fill_the_char(char c, t_bin *line_b, t_bin max, short init);
+int		fill_the_char(char c, t_bin *line_b, int init);
+int		get_the_structure(t_bin **tab, int fd, int x_max, int y_max);
+int		fill_the_char(char c, t_bin *line_b, int init);
 
 #endif
