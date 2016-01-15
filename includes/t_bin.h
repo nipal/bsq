@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_bin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fjanoty </var/mail/fjanoty>                +#+  +:+       +#+        */
+/*   By: fjanoty <fjanoty@student.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/10 02:50:46 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 02:52:59 by fjanoty          ###   ########.fr       */
+/*   Created: 2016/01/15 19:06:42 by fjanoty           #+#    #+#             */
+/*   Updated: 2016/01/15 19:07:11 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef T_BIN_H
 # define T_BIN_H
 
-typedef	 unsigned int	t_bin;
+typedef	unsigned	int	t_bin;
 
 #endif

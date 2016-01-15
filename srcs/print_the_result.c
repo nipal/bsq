@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 17:45:29 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 17:41:03 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/15 19:27:46 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ static	char	what_char(t_bin *tab, int i, int j, int size_b)
 	sqr_x = big_sqr_data(X, 0);
 	sqr_size = big_sqr_data(SIZE, 0);
 	size_b = sizeof(t_bin) * 8;
-
 	if (i > (sqr_x - sqr_size) && i <= sqr_x
-	&& j > (sqr_y - sqr_size) && j <= sqr_y )
+	&& j > (sqr_y - sqr_size) && j <= sqr_y)
 		return (param(PLEIN, 0));
 	if (tab[i / size_b] & 1 << (i % size_b))
 		return (param(VIDE, 0));
@@ -52,10 +51,10 @@ static	void	print_between(t_bin **tab, int nb_var, int siz_bit)
 	}
 }
 
-void	print_the_result(t_bin **tab)
+void			print_the_result(t_bin **tab)
 {
 	int		siz_bit;
 
-	siz_bit =  ((sizeof(t_bin) * 8));
+	siz_bit = ((sizeof(t_bin) * 8));
 	print_between(tab, param(SIZE_X, 0), siz_bit);
 }

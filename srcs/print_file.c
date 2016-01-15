@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 13:28:02 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 20:01:53 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/15 19:40:42 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		init_tab_bin(t_bin **tab)
 
 	j = 1;
 	y_max = param(SIZE_Y, 0);
-	nb_var = ((param(SIZE_X, 0) - 1) / ((8 *  sizeof(t_bin) - 1) - 1)) + 1;
+	nb_var = ((param(SIZE_X, 0) - 1) / ((8 * sizeof(t_bin) - 1) - 1)) + 1;
 	while (j < y_max)
 	{
 		tab[j] = malloc_line(nb_var);
@@ -78,15 +78,15 @@ int		ft_print_file(char *name)
 		fd = open(name, O_RDONLY, S_IREAD);
 	else
 		fd = 0;
-	if(init_param(fd) != 1)
+	if (init_param(fd) != 1)
 		return (-1);
 	get_first_line(&line, fd);
 	tab_bsq = (t_bin**)malloc(sizeof(t_bin*) * param(SIZE_Y, 0));
-	if(!copie_first_line(tab_bsq, line))
+	if (!copie_first_line(tab_bsq, line))
 		return (-1);
 	if (!init_tab_bin(tab_bsq))
 		return (-2);
-	if(!get_the_structure(tab_bsq, fd, param(SIZE_X, 0), param(SIZE_Y, 0)))
+	if (!get_the_structure(tab_bsq, fd, param(SIZE_X, 0), param(SIZE_Y, 0)))
 		return (-1);
 	close(fd);
 	if (solve(tab_bsq, param(SIZE_Y, 0), param(SIZE_X, 0)))

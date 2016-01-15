@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 18:50:29 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 17:08:48 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/15 19:34:38 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,51 +27,25 @@ static	int		init_var2(int **line_temp, int **line_work, int *size_bin)
 	{
 		line_temp[0][i] = 0;
 		line_work[0][i] = 0;
-			i++;
+		i++;
 	}
 	return (1);
 }
 
-static	int 	min_val(int *line_work, int *line_temp, int i, int j)
+static	int		min_val(int *line_work, int *line_temp, int i, int j)
 {
-	int		a;
-	int		b;
-	int		c;
+	int	a;
+	int	b;
+	int	c;
 
 	if (i == 0 || j == 0)
 		return (0);
 	a = line_work[i - 1];
 	b = line_temp[i];
 	c = line_temp[i - 1];
-	a = (a > b) ? b : a ;
-	a = (a > c) ? c : a ;
-	return (a);	
-}
-
-
-t_bin			def_val(t_bin **tab, int j, int i, int max)
-{
-	t_bin	val;
-	t_bin	a;
-	t_bin	b;
-	t_bin	c;
-	t_bin	d;
-
-
-	a = tab[j][i];
-	b = tab[j - 1][i];
-	if (i)
-	{
-		c = (tab[j][i] << 1) | ((tab[j][i - 1] & 1 << max) >> max);
-		d = (tab[j - 1][i] << 1) | ((tab[j - 1][i - 1] & 1 << max) >> max);
-	}
-	else
-	{
-		c = tab[j][i] << 1;
-		d = tab[j - 1][i] << 1;
-	}
-	val = a & b & c & d;
-	return (val);
+	a = (a > b) ? b : a;
+	a = (a > c) ? c : a;
+	return (a);
 }
 
 static	void	swap_line(int **str1, int **str2)
@@ -96,7 +70,7 @@ int				solve(t_bin **tab, int y_max, int x_max)
 	int		j;
 	int		i;
 	int		size_bin;
-	
+
 	j = -1;
 	init_var2(&line_temp, &line_work, &size_bin);
 	if (!line_temp || !line_work)

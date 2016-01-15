@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 15:50:07 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 17:13:02 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/15 19:00:02 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,3 @@ void	reste_param(void);
 int		init_param(int fd);
 t_bin	*malloc_line(int nb_var);
 #endif
-

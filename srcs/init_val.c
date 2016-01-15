@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 18:07:15 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 20:01:45 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/15 19:22:20 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,25 @@ int		param(int action, int valu)
 
 void	reste_param(void)
 {
-	param(SIZE_X, -param(SIZE_X , 0));
-	param(SIZE_Y, -param(SIZE_Y , 0));
-	param(VIDE, -param(VIDE , 0));
-	param(OBSTACLE, -param(OBSTACLE , 0));
-	param(PLEIN, -param(PLEIN , 0));
+	param(SIZE_X, -param(SIZE_X, 0));
+	param(SIZE_Y, -param(SIZE_Y, 0));
+	param(VIDE, -param(VIDE, 0));
+	param(OBSTACLE, -param(OBSTACLE, 0));
+	param(PLEIN, -param(PLEIN, 0));
 }
 
-int		ft_atoi_fd(int fd , char *c)
+int		ft_atoi_fd(int fd, char *c)
 {
 	int		ok;
 	int		nb_line;
 	int		coef;
-	
+
 	coef = 1;
 	ok = read(fd, c, 1);
 	nb_line = 0;
 	while (ok && ((*c >= 9 && *c <= 13) || *c == 32))
 		ok = read(fd, c, 1);
-	if (ok && *c == '+' )
+	if (ok && *c == '+')
 		ok = read(fd, c, 1);
 	if (ok && *c == '-' && (ok = read(fd, c, 1)))
 		coef = -1;
@@ -76,7 +76,7 @@ int		init_param(int fd)
 	int		nb_line;
 
 	reste_param();
-	if (((nb_line = ft_atoi_fd(fd , &c))) >= 0)
+	if (((nb_line = ft_atoi_fd(fd, &c))) >= 0)
 		ok = 1;
 	else
 		ok = 0;
@@ -84,7 +84,7 @@ int		init_param(int fd)
 	if (ok && c != '\n')
 		param(VIDE, c);
 	if (ok && (ok = read(fd, &c, 1)) && c != '\n')
-		param(OBSTACLE, c); 
+		param(OBSTACLE, c);
 	if (ok && (ok = read(fd, &c, 1)) && c != '\n')
 		param(PLEIN, c);
 	if (ok && (ok = read(fd, &c, 1)) && c == '\n')

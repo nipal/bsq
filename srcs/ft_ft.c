@@ -6,7 +6,7 @@
 /*   By: fjanoty <fjanoty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 14:07:51 by fjanoty           #+#    #+#             */
-/*   Updated: 2016/01/10 02:33:24 by fjanoty          ###   ########.fr       */
+/*   Updated: 2016/01/15 19:21:52 by fjanoty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_putstr(unsigned char *str, int nb_char)
 void	putnbr62(short nbr)
 {
 	static	char	base[63] = CHAINE;
+
 	if (nbr < 0)
 	{
 		write(1, "-", 1);
@@ -42,5 +43,5 @@ void	putnbr62(short nbr)
 	}
 	if (nbr >= 62)
 		putnbr62(nbr / 62);
-	write(1, base + (nbr % 62),1);
+	write(1, base + (nbr % 62), 1);
 }
